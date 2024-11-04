@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "/proto";
+
+message User {
+    string Username = 1;
+    string Email = 2;
+    string Password = 3;
+}
+
+message LogUser {
+    string Email = 1;
+    string Password = 2;
+}
+
+message UserReq {
+    User user = 1;
+}
+
+message UserLogReq{
+    LogUser user = 1;
+}
+
+message UserResp {
+    string status = 1;
+}
+
+message UserAuth {
+    string Email = 1;
+    string Token = 2;
+}
+
+message UserAuthReq {
+    UserAuth user = 1;
+}
+
+service Register {
+    rpc Register (UserReq)     returns (UserResp);
+    rpc Login    (UserLogReq)  returns (UserResp);
+    rpc Auth     (UserAuthReq) returns (User);
+}
